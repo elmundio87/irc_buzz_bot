@@ -11,4 +11,4 @@ RUN cd /root && bundle install
 
 CMD simpleproxy -L 4000 -R localhost:2000 -d && ruby /root/bot.rb
 
-EXPOSE 2000
+EXPOSE 4000
