@@ -1,5 +1,6 @@
 require 'cinch'
 require 'socket'
+require 'json'
 
 class JenkinsReceiver
   include Cinch::Plugin
@@ -7,7 +8,8 @@ class JenkinsReceiver
   listen_to :monitor_msg, :method => :send_msg
 
   def send_msg(m, msg)
-     Channel("#devops").send "Build notification: #{msg}"
+    a = JSON.parse msg
+    Channel("#devops").send "Build notification: #{a['name']} #{a['build']['phase']} - #{a['build']['status']}"
   end
 
 end
