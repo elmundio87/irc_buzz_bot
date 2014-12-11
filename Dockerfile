@@ -5,10 +5,10 @@ ADD bot.rb	/root/bot.rb
 ADD Gemfile /root/Gemfile
 
 RUN apt-get update
-RUN apt-get install ruby-full -y
+RUN apt-get install ruby-full simpleproxy -y
 RUN gem install bundle
 RUN cd /root && bundle install
 
-CMD ruby /root/bot.rb
+CMD simpleproxy -L 4000 -R localhost:2000 -d && ruby /root/bot.rb
 
 EXPOSE 2000
