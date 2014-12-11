@@ -26,6 +26,7 @@ class BigBenBong
 
     (1..time).each { |i| reply += "bong " }
     m.reply reply
+    m.reply "It's #{time} a bong!"
   end
 end
 
