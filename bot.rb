@@ -33,7 +33,7 @@ end
 
 bot = Cinch::Bot.new do
   configure do |c|
-    c.server = "192.168.59.103"
+    c.server = "ircd"
     c.nick = 'buzz'
     c.channels = ["#devops"]
     c.plugins.plugins = [JenkinsReceiver,BigBenBong]
