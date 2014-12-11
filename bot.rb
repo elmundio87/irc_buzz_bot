@@ -43,7 +43,7 @@ bot = Cinch::Bot.new do
     m.reply "Hello, #{m.user.nick}"
   end
 
-  on :message, /^(.*)jenkins(.*)/ do |m, query|
+  on :message, /^(.*)(?i:jenkins)(.*)/ do |m, query|
     m.reply "I think you mean 'Jenkin'"
   end
 
