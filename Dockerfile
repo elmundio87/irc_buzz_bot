@@ -8,7 +8,6 @@ RUN apt-get update
 RUN apt-get install ruby-full -y
 RUN gem install bundle
 RUN cd /root && bundle install
-RUN chmod +x /root/run.sh
 
 CMD ruby /root/bot.rb
 
