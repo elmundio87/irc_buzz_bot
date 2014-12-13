@@ -92,13 +92,19 @@ class TrelloBot
       config.member_token = redis.get("trello_api_#{m.user.nick}")
     end
 
+  begin
     cards = Trello::Member.find(user).cards
+  rescue
+    m.reply "ERROR: User '#{user}' was not found. Are you sure that's correct?"
+    return
+  end
 
     reply = []
 
     cards.each do |card|
-      if(getList(card.attributes[:list_id]) == "In Progress")
-        reply << card.attributes[:name]
+      list = getList(card.attributes[:list_id])
+      if(list == "In Progress" || list == "Doing")
+        reply << card.attributes[:name] + " : " + card.attributes[:url]
       end
     end
 
