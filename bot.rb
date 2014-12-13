@@ -1,6 +1,7 @@
 require 'cinch'
 require 'socket'
 require 'redis'
+require 'json'
 
 class JenkinsReceiver
   include Cinch::Plugin
@@ -8,7 +9,8 @@ class JenkinsReceiver
   listen_to :monitor_msg, :method => :send_msg
 
   def send_msg(m, msg)
-     Channel("#devops").send "Build notification: #{msg}"
+    a = JSON.parse msg
+    Channel("#devops").send "Build notification: #{a['name']} #{a['build']['phase']} - #{a['build']['status']}"
   end
 
 end
@@ -128,7 +130,7 @@ end
 
 bot = Cinch::Bot.new do
   configure do |c|
-    c.server = "192.168.59.103"
+    c.server = "ircd"
     c.nick = 'buzz'
     c.channels = ["#devops"]
     c.plugins.plugins = [JenkinsReceiver,BigBenBong,TrelloBot]
