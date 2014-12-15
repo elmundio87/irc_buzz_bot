@@ -5,7 +5,7 @@ ADD bot.rb	/root/bot.rb
 ADD Gemfile /root/Gemfile
 
 RUN apt-get update
-RUN apt-get install ruby-full simpleproxy -y
+RUN apt-get install build-essential ruby-full simpleproxy -y
 RUN gem install bundle
 RUN cd /root && bundle install
 
